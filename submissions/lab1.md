@@ -71,3 +71,25 @@ Which of these are MISSING? (cross-reference Lecture 1 OWASP Top 10:2025 — A06
 - Sections included: Goal / Changes / Testing / Artifacts & Screenshots
 - Checklist items: 3 items (title, no secrets, submission file)
 - Auto-fill verified: [ ] Yes — opened draft PR and template appeared
+## Bonus: CI Smoke Test
+
+- Workflow file: `.github/workflows/lab1-smoke.yml`
+- Trigger: `pull_request` on main
+- Run URL (must be green): https://github.com/theanh1709/DevSecOps-Intro/actions/runs/30278188251/job/90017518732
+- Workflow run duration: ~25s
+
+### Curl response excerpt:
+HTTP_CODE=$(curl \
+    --silent \
+    --output /dev/null \
+    --write-out "%{http_code}" \
+    http://127.0.0.1:3000/)
+  
+  echo "Homepage HTTP status: ${HTTP_CODE}"
+  
+  if [ "${HTTP_CODE}" != "200" ]; then
+    echo "Expected HTTP 200 but received ${HTTP_CODE}."
+    exit 1
+  fi
+  shell: /usr/bin/bash -e {0}
+Homepage HTTP status: 200
