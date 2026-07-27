@@ -3,139 +3,71 @@
 ## Triage Report: OWASP Juice Shop
 
 ### Scope & Asset
-
 - Asset: OWASP Juice Shop (local lab instance)
 - Image: `bkimminich/juice-shop:v20.0.0`
-- Image digest: `REPLACE_WITH_OUTPUT_OF_DOCKER_INSPECT`
-- Host OS: `REPLACE_WITH_HOST_OS`
-- Docker version: `REPLACE_WITH_DOCKER_VERSION`
+- Image digest: sha256:fd58bdc9745416afce8184ee0666278a436574633ea7880365153a63bfd418b0
+- Host OS: Windowns/ Ubuntu 24.04>
+- Docker version: Docker version 29.1.3, build f52814d  
 
 ### Deployment Details
-
-- Run command used:
-
-  ```bash
-  docker run -d --name juice-shop \
-    -p 127.0.0.1:3000:3000 \
-    bkimminich/juice-shop:v20.0.0
-  ```
-
-- Access URL: <http://127.0.0.1:3000>
-- Network exposure: 127.0.0.1 only? [x] Yes [ ] No
-- Container restart policy: `REPLACE_WITH_RESTART_POLICY`
-
-The container is bound only to `127.0.0.1`, so the deliberately vulnerable
-application is not exposed on every host network interface.
+- Run command used: `docker run -d --name juice-shop -p 127.0.0.1:3000:3000 bkimminich/juice-shop:v20.0.0`
+- Access URL: http://127.0.0.1:3000
+- Network exposure: 127.0.0.1 only? [x] Yes [ ] No (explain if No)
+- Container restart policy: no (default)
 
 ### Health Check
+- HTTP code on `/`: 200
+- API check (first 200 chars of `/api/Products`):
+[{ 
+"id": 1,
+ "name": "Apple Juice (1000ml)", 
+ "description": "The all-time classic.", 
+ "price": 1.99, 
+"deluxePrice": 0.99, 
+"image": "apple_juice.jpg", 
+ "createdAt": "2026-07
+- Container uptime: 
+CONTAINER ID   IMAGE                           COMMAND                  CREATED          STATUS          PORTS                      NAMES
+a20fb3e3303c   bkimminich/juice-shop:v20.0.0   "/nodejs/bin/node /j…"   16 minutes ago   Up 16 minutes   127.0.0.1:3000->3000/tcp   juice-shop
 
-- HTTP code on `/`: `REPLACE_WITH_HTTP_STATUS`
-- Product count returned by `/api/Products`: `REPLACE_WITH_PRODUCT_COUNT`
-- Application version: `REPLACE_WITH_APPLICATION_VERSION`
+### Initial Surface Snapshot (from browser exploration)
+- Login/Registration visible: [x] Yes [ ] No — notes: visible in top-right Account menu
+- Product listing/search present: [x] Yes [ ] No — notes: 
+- Admin or account area discoverable: [ ] Yes [x] No — notes: 
+- Client-side errors in DevTools console: [ ] Yes [x] No
+- Pre-populated local storage / cookies: none observed
 
-API check — first 200 characters of `/api/Products`:
-
-```json
-REPLACE_WITH_FIRST_200_CHARACTERS_OF_PRODUCTS_API_RESPONSE
+### Security Headers (Quick Look)
+Run: `curl -I http://127.0.0.1:3000 2>&1 | head -20`. Paste output:
 ```
-
-Container uptime:
-
-```text
-REPLACE_WITH_DOCKER_PS_OUTPUT
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current                                                                          
+								Dload  Upload   Total   Spent    Left  Speed                                             
+	0  9903    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0                                          
+	HTTP/1.1 200 OK                                                                                                         
+	Access-Control-Allow-Origin: *                                                                                          
+	X-Content-Type-Options: nosniff                                                                                         
+	X-Frame-Options: SAMEORIGIN                                                                                             
+	Feature-Policy: payment 'self'                                                                                          
+	X-Recruiting: /#/jobs                                                                                                  
+	Accept-Ranges: bytes                                                                                                    
+	Cache-Control: public, max-age=0                                                                                        
+	Last-Modified: Mon, 27 Jul 2026 13:30:16 GMT                                                                            
+	ETag: W/"26af-19fa3c4dfdc"                                                                                              
+	Content-Type: text/html; charset=UTF-8                                                                                  
+	Content-Length: 9903                                                                                                    
+	Vary: Accept-Encoding                                                                                                   
+	Date: Mon, 27 Jul 2026 13:52:49 GMT                                                                                     
+	Connection: keep-alive                                                                                                  
+	Keep-Alive: timeout=5   
 ```
-
-### Initial Surface Snapshot
-
-- Login/Registration visible: [ ] Yes [ ] No  
-  Notes: `REPLACE_WITH_REAL_OBSERVATION`
-
-- Product listing/search present: [ ] Yes [ ] No  
-  Notes: `REPLACE_WITH_REAL_OBSERVATION`
-
-- Admin or account area discoverable: [ ] Yes [ ] No  
-  Notes: `REPLACE_WITH_REAL_OBSERVATION`
-
-- Client-side errors in DevTools console: [ ] Yes [ ] No  
-  Notes: `REPLACE_WITH_REAL_OBSERVATION`
-
-- Pre-populated local storage/cookies:
-  - `REPLACE_WITH_KEY_OR_COOKIE_1`
-  - `REPLACE_WITH_KEY_OR_COOKIE_2`
-  - `REPLACE_WITH_ADDITIONAL_ITEMS_OR_REMOVE_THIS_LINE`
-
-- Product review request observed:
-  - Endpoint: `REPLACE_WITH_REVIEW_ENDPOINT`
-  - HTTP status: `REPLACE_WITH_STATUS_CODE`
-  - Authentication required: `REPLACE_WITH_YES_OR_NO`
-  - Notes: `REPLACE_WITH_REAL_OBSERVATION`
-
-### Security Headers — Quick Look
-
-Command used:
-
-```bash
-curl -I http://127.0.0.1:3000 2>&1 | head -20
-```
-
-Observed output:
-
-```text
-REPLACE_WITH_REAL_CURL_HEADER_OUTPUT
-```
-
-Headers missing from the response:
-
-- [ ] `Content-Security-Policy`
-- [ ] `Strict-Transport-Security`
-- [ ] `X-Content-Type-Options: nosniff`
-- [ ] `X-Frame-Options`
-
-> Mark `[x]` only for headers that were actually missing from your response.
-
-### Top 3 Risks Observed
-
-1. **REPLACE_WITH_RISK_NAME_1** —  
-   `Write 2–3 sentences explaining what you observed, why it matters, and map
-   it to one OWASP Top 10:2025 category such as A01–A10.`
-
-2. **REPLACE_WITH_RISK_NAME_2** —  
-   `Write 2–3 sentences explaining what you observed, why it matters, and map
-   it to one OWASP Top 10:2025 category such as A01–A10.`
-
-3. **REPLACE_WITH_RISK_NAME_3** —  
-   `Write 2–3 sentences explaining what you observed, why it matters, and map
-   it to one OWASP Top 10:2025 category such as A01–A10.`
-
+Which of these are MISSING? (cross-reference Lecture 1 OWASP Top 10:2025 — A06)
+- [x] `Content-Security-Policy`
+- [x] `Strict-Transport-Security`
+- [x] `X-Content-Type-Options: nosniff`
+- [x] `X-Frame-Options`
 ## PR Template Setup
 
 - File: `.github/PULL_REQUEST_TEMPLATE.md`
 - Sections included: Goal / Changes / Testing / Artifacts & Screenshots
-- Checklist items:
-  - Title is clear and follows the `feat(labN): <topic>` style
-  - No secrets or large temporary files are committed
-  - Submission file exists at `submissions/labN.md`
-- Auto-fill verified: [x] Yes — the PR description showed the template before manual editing
-- Draft PR evidence: `REPLACE_WITH_DRAFT_PR_URL_OR_SCREENSHOT_PATH`
-
-## Lab Completion Checklist
-
-- [x] Task 1 done — Juice Shop deployed and triage report created
-- [x] Task 2 done — `.github/PULL_REQUEST_TEMPLATE.md` created and auto-fill verified
-- [ ] Bonus done — `.github/workflows/lab1-smoke.yml` runs successfully
-
-## Bonus: CI Smoke Test
-
-> Remove this entire section if you did not complete the bonus task.
-
-- Workflow file: `.github/workflows/lab1-smoke.yml`
-- Trigger: `pull_request` on `main`
-- Workflow permissions: `contents: read`
-- Run URL: `REPLACE_WITH_GREEN_ACTIONS_RUN_URL`
-- Workflow run duration: `REPLACE_WITH_DURATION`
-
-Curl response excerpt:
-
-```text
-REPLACE_WITH_SUCCESSFUL_HTTP_200_EXCERPT
-```
+- Checklist items: 3 items (title, no secrets, submission file)
+- Auto-fill verified: [ ] Yes — opened draft PR and template appeared
