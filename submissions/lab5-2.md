@@ -6,8 +6,9 @@
 
 - Duration: <2 minutes>
 - Total alerts: <10>
+
 | Severity | Count |
-|----------|------:|
+|----------|-------|
 | High | <0> |
 | Medium | <2> |
 | Low | <5> |
@@ -17,8 +18,9 @@
 
 - Duration: <5 minutes>
 - Total alerts: <13>
+
 | Severity | Count |
-|----------|------:|
+|----------|-------|
 | High | <2> |
 | Medium | <4> |
 | Low | <3> |
