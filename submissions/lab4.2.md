@@ -221,3 +221,17 @@ How does this CI pipeline complement the local Syft + Grype workflow from Lab 4.
 ```text
 This CI pipeline complements the local Syft + Grype workflow from Lab 4.1 by moving the same SBOM and vulnerability analysis into an automated GitHub Actions process. Instead of relying only on manual local commands, the scans can run consistently on PRs and pushes, producing downloadable reports for review in the CI system.
 ```
+
+How to Submit
+git add .github/workflows/lab4-sbom-sca.yml
+git add labs/lab4/juice-shop-attestation.json  # Bonus only
+git add submissions/lab4.2.md
+git commit -m "feat(lab4.2): Trivy comparison + SBOM/SCA CI workflow + sign-ready attestation"
+git push -u origin feature/lab4.2
+Do NOT commit labs/lab4/trivy.* or labs/lab4/reports/ — they're regeneratable and large. The submission paste-in and the workflow artifact are the evidence.
+
+PR checklist body:
+
+- [x] Task 1 — Trivy comparison + when-to-pick-each tradeoff
+- [x] Task 2 — lab4-sbom-sca.yml committed + workflow run is green (Success)
+- [ ] Bonus — sign-ready CycloneDX attestation for Lab 8
