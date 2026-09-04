@@ -27,19 +27,18 @@
 
 ### Compared to Lab 4's Grype scan
 Look back at your Lab 4 Grype results on the same image. Pick **two CVEs**:
+
 1. One that BOTH Grype and Trivy found
-2. One that ONE tool found and the OTHER missed
-For each: explain why the tools differ (DB freshness? Different package matching?
-EPSS scoring? Lecture 7 + Lecture 4 give context.) (2-3 sentences per CVE.)
-```
 
-### Compared to Lab 4's Grype scan
-
-**1. CVE found by both Grype and Trivy: `CVE-2019-10744` (`lodash`)**
+**CVE found by both Grype and Trivy: `CVE-2019-10744` (`lodash`)**
 
 Both Grype and Trivy found this CVE because `lodash@2.4.2` is clearly present in the Juice Shop Node.js dependency tree, and this is an older, well-known vulnerability with stable records in GHSA/NVD. Trivy reports it as `CRITICAL`; Grype may show slightly different scoring or metadata, but that difference is mostly from severity/EPSS enrichment rather than package detection.
 
-**2. CVE found by Trivy but missed by Grype: `CVE-2026-73566` (`tar`)**
+2. One that ONE tool found and the OTHER missed
+For each: explain why the tools differ (DB freshness? Different package matching?
+EPSS scoring? Lecture 7 + Lecture 4 give context.) (2-3 sentences per CVE.)
+
+**CVE found by Trivy but missed by Grype: `CVE-2026-73566` (`tar`)**
 
 Trivy found `CVE-2026-73566` in multiple `tar` packages, including `tar@4.4.19`, `tar@6.2.1`, and `tar@7.5.15`, with the fixed version listed as `7.5.21`. If Grype missed it in Lab 4, the likely reason is database freshness: this CVE was published on `2026-08-13`, while the Trivy scan was created on `2026-09-04`, so Trivy may have had a newer GHSA/advisory database. Another possible reason is different package matching, since Trivy may detect nested npm dependencies and map them to GHSA advisories differently than Grype.
 ---
