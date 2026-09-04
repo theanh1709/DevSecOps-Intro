@@ -6,9 +6,9 @@
 
 | Severity | Total | With fix available |
 |----------|-------|--------------------|
-| Critical | 0 | 8 |
-| High | 1 | 1 |
-| **Total** | 1 | 9 |
+| Critical | 10 | 8 |
+| High | 61 | 60 |
+| **Total** | 71 | 68 |
 
 ### Top 10 CVEs with fixes
 
