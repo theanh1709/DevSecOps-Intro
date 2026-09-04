@@ -6,9 +6,9 @@
 
 | Severity | Total | With fix available |
 |----------|-------|--------------------|
-| Critical | 0 | 8 |
-| High | 1 | 1 |
-| **Total** | 1 | 9 |
+| Critical | 10 | 8 |
+| High | 61 | 60 |
+| **Total** | 71 | 68 |
 
 ### Top 10 CVEs with fixes
 
@@ -41,6 +41,7 @@ EPSS scoring? Lecture 7 + Lecture 4 give context.) (2-3 sentences per CVE.)
 **CVE found by Trivy but missed by Grype: `CVE-2026-73566` (`tar`)**
 
 Trivy found `CVE-2026-73566` in multiple `tar` packages, including `tar@4.4.19`, `tar@6.2.1`, and `tar@7.5.15`, with the fixed version listed as `7.5.21`. If Grype missed it in Lab 4, the likely reason is database freshness: this CVE was published on `2026-08-13`, while the Trivy scan was created on `2026-09-04`, so Trivy may have had a newer GHSA/advisory database. Another possible reason is different package matching, since Trivy may detect nested npm dependencies and map them to GHSA advisories differently than Grype.
+
 ---
 
 ## How to Submit
