@@ -18,13 +18,8 @@
 | CKV_AWS_290 | 3 | Ensures IAM policies do not allow write access without appropriate resource or condition constraints.  |
 
 ### Module-leverage analysis (Lecture 6 slide 17)
-Looking at your top-5 Terraform rules, which ONE fix would eliminate the most findings if applied
-at the module level? (2-3 sentences. e.g., "If the shared IAM policy dropped its `Resource: "*"`
-wildcard, the CKV_AWS_355/289/290 findings on every policy would collapse into one fix.")
-```
 
 The highest-leverage fix would be to update the shared IAM policy module to remove `Resource: "*"` and replace it with specific resource ARNs and appropriate conditions. This single module-level change would address recurring CKV_AWS_355, CKV_AWS_289, and CKV_AWS_290 findings across multiple IAM policies, eliminating far more findings than fixing each policy individually.
-
 
 ---
 
